@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 import reducer from './reducers';
 import PickApple from './components/pickApple.jsx';
 import AppleItem from './components/appleItem.jsx';
-import indexCss from '../../css/index.scss';
+import indexCss from '../../css/index.css';
 
 const store = createStore(reducer, applyMiddleware(thunk));
 render(

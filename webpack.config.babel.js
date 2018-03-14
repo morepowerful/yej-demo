@@ -48,7 +48,7 @@ module.exports = {
                         loader: 'css-loader',
                         },
                     ],
-                    fallback: 'style-loader',
+                    // fallback: 'style-loader',
                 }),
             },
             {
@@ -60,7 +60,7 @@ module.exports = {
                         },
                         "sass-loader"
                     ],
-                    fallback: 'style-loader',
+                    // fallback: 'style-loader',
                 }),
             },
             {
@@ -81,7 +81,7 @@ module.exports = {
         contentBase: [resolve(__dirname, './page/')]
     },
     plugins: [
-        new ExtractTextPlugin('[name].css'),
+        new ExtractTextPlugin('./css/[name].css'),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.DefinePlugin({
             devport: true
