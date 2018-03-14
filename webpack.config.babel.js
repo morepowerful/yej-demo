@@ -84,7 +84,8 @@ module.exports = {
         new ExtractTextPlugin('./css/[name].css'),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.DefinePlugin({
-            devport: true
+            devport: true,
+            'process.env.NODE_ENV': JSON.stringify('production')
         }),
         new OpenBrowserWebpackPlugin({
             url: 'http://localhost:8090'
