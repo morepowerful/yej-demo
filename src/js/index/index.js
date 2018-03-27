@@ -21,3 +21,6 @@ render(
     </Provider>,
     document.getElementById('app')
 )
+
+console.log("process.env.NODE_ENV 的值是(index.js)："+ process.env.NODE_ENV)
+console.log('devport:',devport)

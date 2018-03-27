@@ -4,6 +4,9 @@ var resolve = require('path').resolve;
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin'); //让css文件单独打包出来
 var OpenBrowserWebpackPlugin = require("open-browser-webpack-plugin");
+var CleanWebpackPlugin = require('clean-webpack-plugin'); 
+var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+console.log(BundleAnalyzerPlugin);
 // import { readdirSync, existsSync } from 'fs';
 var readdirSync = require('fs').readdirSync;
 var existsSync = require('fs').existsSync;
@@ -20,7 +23,6 @@ var entry = (function() {     //第一种获取多文件入口
     })
     return entryObj;
 })()
-console.log('入口', entry)
 // var entry = function(path) {  //第二种获取多文件入口
 //     // path = './src/js/*/index.js?(x)'
 //     var entryObj = {};
@@ -83,12 +85,20 @@ module.exports = {
     plugins: [
         new ExtractTextPlugin('./css/[name].css'),
         new webpack.HotModuleReplacementPlugin(),
+        new BundleAnalyzerPlugin({     //分析打包后每个文件体积
+            analyzerMode: 'static',
+            logLevel: 'error',
+        }),
         new webpack.DefinePlugin({
             devport: true,
             'process.env.NODE_ENV': JSON.stringify('production')
         }),
         new OpenBrowserWebpackPlugin({
             url: 'http://localhost:8090'
-        })
+        }),
+        new CleanWebpackPlugin(['dist/'], {  //清除dist文件夹中重复的文件
+            root: resolve(__dirname, '.'),
+          }),
     ]
 }
+console.log("process.env.NODE_ENV 的值是(webpack.config.prod.js)："+ process.env.NODE_ENV)

@@ -7,7 +7,7 @@ class PickApple extends React.Component {
     constructor(props) {
         super(props);
       }
- 
+
     render() {
         const obj = Object.assign({}, {name: "liudong"})
         var curChildren = React.Children.map(this.props.children, function(children) {
