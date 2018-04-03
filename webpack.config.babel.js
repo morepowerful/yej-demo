@@ -37,7 +37,7 @@ module.exports = {
     output: {
         filename: '[name].js',
         path: __dirname + '/dist',
-        // publicPath: '/dist',
+        // publicPath: '/',       //如果你require了一些资源或直接引用了网络上的资源，这些资源里包含uri属性（如css中设置img：url('./1.jpg')），就要使用就这个属性，否则会找不到文件。（如果没有使用uri资源,那么这个属性没什么用）。
     },
     devtool: 'source-map',
     module: {
@@ -77,18 +77,18 @@ module.exports = {
         ]
     },
     devServer: {
-        publicPath: '/dist',              //让index.html里同过../dist/xxx能访问到
+        publicPath: '/dist',           //在开启服务后怎么去访问 contentBase下的文件以及打包后的文件，这里表示“/dist/+contentBase下的文件以及打包后的文件”去访问
         hot: true,
         port: 8090,
-        contentBase: [resolve(__dirname, './page/')]
+        contentBase: [resolve(__dirname, './page/'),resolve(__dirname, './dist')]
     },
     plugins: [
         new ExtractTextPlugin('./css/[name].css'),
         new webpack.HotModuleReplacementPlugin(),
-        new BundleAnalyzerPlugin({     //分析打包后每个文件体积
-            analyzerMode: 'static',
-            logLevel: 'error',
-        }),
+        // new BundleAnalyzerPlugin({     //分析打包后每个文件体积
+        //     analyzerMode: 'static',
+        //     logLevel: 'error',
+        // }),
         new webpack.DefinePlugin({
             devport: true,
             'process.env.NODE_ENV': JSON.stringify('production')
@@ -99,6 +99,10 @@ module.exports = {
         new CleanWebpackPlugin(['dist/'], {  //清除dist文件夹中重复的文件
             root: resolve(__dirname, '.'),
           }),
+        new webpack.DllReferencePlugin({
+            context: __dirname,
+            manifest: require('./manifest.json'),
+        }),
     ]
 }
 console.log("process.env.NODE_ENV 的值是(webpack.config.prod.js)："+ process.env.NODE_ENV)
