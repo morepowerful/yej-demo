@@ -6,7 +6,6 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin'); //让css文件�
 var OpenBrowserWebpackPlugin = require("open-browser-webpack-plugin");
 var CleanWebpackPlugin = require('clean-webpack-plugin'); 
 var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-console.log(BundleAnalyzerPlugin);
 // import { readdirSync, existsSync } from 'fs';
 var readdirSync = require('fs').readdirSync;
 var existsSync = require('fs').existsSync;
@@ -39,7 +38,7 @@ module.exports = {
         path: __dirname + '/dist',
         // publicPath: '/',       //如果你require了一些资源或直接引用了网络上的资源，这些资源里包含uri属性（如css中设置img：url('./1.jpg')），就要使用就这个属性，否则会找不到文件。（如果没有使用uri资源,那么这个属性没什么用）。
     },
-    devtool: 'source-map',
+    // devtool: 'source-map',
     module: {
         rules: [
             {
@@ -52,6 +51,7 @@ module.exports = {
                     ],
                     // fallback: 'style-loader',
                 }),
+                // use: ['css-loader']
             },
             {
                 test: /\.scss$/,  
@@ -64,6 +64,7 @@ module.exports = {
                     ],
                     // fallback: 'style-loader',
                 }),
+                // use: [ 'css-loader','sass-loader']
             },
             {
                 test: /\.jsx?$/,
@@ -77,10 +78,10 @@ module.exports = {
         ]
     },
     devServer: {
-        publicPath: '/dist',           //在开启服务后怎么去访问 contentBase下的文件以及打包后的文件，这里表示“/dist/+contentBase下的文件以及打包后的文件”去访问
+        publicPath: '/dist',           //在开启服务后怎么去访问打包的文件
         hot: true,
         port: 8090,
-        contentBase: [resolve(__dirname, './page/'),resolve(__dirname, './dist')]
+        contentBase: [resolve(__dirname, './page/')]        //开启服务时，webpack会将contentBase包含文件背的所有url带有（../;./等）替换为localhost:8090
     },
     plugins: [
         new ExtractTextPlugin('./css/[name].css'),

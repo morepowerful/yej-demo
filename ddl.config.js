@@ -7,7 +7,7 @@ const vendors = [
  
 module.exports = {
  output: {
-  path:  __dirname + '/page',
+  path:  __dirname + '/common/page',
   filename: '[name].js',
   library: '[name]',
  },
