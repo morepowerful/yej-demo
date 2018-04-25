@@ -31,6 +31,7 @@ var entry = (function() {     //第一种获取多文件入口
 //     })
 //     return entryObj;
 // }
+var isPro = process.env.NODE_ENV === 'production';
 module.exports = {
     entry,
     output: {
@@ -43,19 +44,18 @@ module.exports = {
         rules: [
             {
                 test: /\.css$/,  
-                use: ExtractTextPlugin.extract({
+                use: isPro ? ExtractTextPlugin.extract({
                     use: [
                         {
                         loader: 'css-loader',
                         },
                     ],
                     // fallback: 'style-loader',
-                }),
-                // use: ['css-loader']
+                }) : ['style-loader','css-loader'],
             },
             {
                 test: /\.scss$/,  
-                use: ExtractTextPlugin.extract({
+                use: isPro ? ExtractTextPlugin.extract({
                     use: [
                         {
                         loader: 'css-loader',
@@ -63,8 +63,8 @@ module.exports = {
                         "sass-loader"
                     ],
                     // fallback: 'style-loader',
-                }),
-                // use: [ 'css-loader','sass-loader']
+                }) : [ 'style-loader','css-loader','sass-loader'],
+                // use: [ 'style-loader','css-loader','sass-loader']
             },
             {
                 test: /\.jsx?$/,
@@ -91,8 +91,7 @@ module.exports = {
         //     logLevel: 'error',
         // }),
         new webpack.DefinePlugin({
-            devport: true,
-            'process.env.NODE_ENV': JSON.stringify('production')
+            isPro,
         }),
         new OpenBrowserWebpackPlugin({
             url: 'http://localhost:8090'

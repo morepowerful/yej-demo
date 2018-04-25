@@ -9,7 +9,7 @@ import AppleItem from './components/appleItem.jsx';
 import indexCss from '../../css/index.css';
 import DevTools from '../../devtool/redux-devtool'
 
-const enhancer = compose(
+const enhancer = isPro ?  applyMiddleware(thunk) :compose(
     //你要使用的中间件，放在前面
     applyMiddleware(thunk),
     //必须的！启用带有monitors（监视显示）的DevTools
