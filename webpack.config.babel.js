@@ -81,7 +81,7 @@ module.exports = {
         publicPath: '/dist',           //在开启服务后怎么去访问打包的文件
         hot: true,
         port: 8090,
-        contentBase: [resolve(__dirname, './page/')]        //开启服务时，webpack会将contentBase包含文件背的所有url带有（../;./等）替换为localhost:8090
+        contentBase: [resolve(__dirname, './page/')]        //开启服务时，能在localhost:8090下直接去访问的文件或文件夹,webpack会将contentBase包含文件背的所有url带有（../;./等）替换为localhost:8090
     },
     plugins: [
         new ExtractTextPlugin('./css/[name].css'),
