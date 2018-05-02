@@ -37,7 +37,7 @@ module.exports = {
     output: {
         filename: '[name].js',
         path: __dirname + '/dist',
-        // publicPath: '/',       //如果你require了一些资源或直接引用了网络上的资源，这些资源里包含uri属性（如css中设置img：url('./1.jpg')），就要使用就这个属性，否则会找不到文件。（如果没有使用uri资源,那么这个属性没什么用）。
+        // publicPath: '/',       //如果一些资源或直接引用了网络上的资源，这些资源里包含uri属性（如css中设置img：url('./1.jpg')），就要使用就这个属性，否则会找不到文件。（如果没有使用uri资源,那么这个属性没什么用）。
     },
     // devtool: 'source-map',
     module: {

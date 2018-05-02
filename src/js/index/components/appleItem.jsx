@@ -1,6 +1,15 @@
 import React from 'react';
-
-class AppleItem extends React.Component {
+const HocItem = (WrapCompoent) =>             //相当于一个高阶组件
+    class extends React.Component {
+        render() {
+            return <WrapCompoent age={23} {...this.props}/>
+        }
+    }
+@HocItem
+export default class AppleItem extends React.Component {
+    constructor(props) {
+        super(props);
+      }
     render() {
         return (
             <div>
@@ -13,12 +22,5 @@ class AppleItem extends React.Component {
     }
 }
 
-const HocItem = (WrapCompoent) =>             //相当于一个高阶组件
-    class extends React.Component {
-        render() {
-            return <WrapCompoent age={23} {...this.props}/>
-        }
-    }
-
-export default HocItem(AppleItem);
+// export default HocItem(AppleItem);
 

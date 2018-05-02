@@ -15,6 +15,7 @@ const enhancer = isPro ?  applyMiddleware(thunk) :compose(
     //必须的！启用带有monitors（监视显示）的DevTools
     DevTools.instrument()
   )
+  debugger
 const store = createStore(reducer, enhancer);
 render(
     <Provider store={store}>
@@ -31,4 +32,3 @@ render(
 )
 
 console.log("process.env.NODE_ENV 的值是(index.js)："+ process.env.NODE_ENV)
-console.log('devport:',devport)

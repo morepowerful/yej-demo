@@ -3,7 +3,17 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import actions from '../actions/appleAction';
 
-class PickApple extends React.Component {
+const mapStateToProps = state => ({
+    state: state.appleCount
+});
+
+const mapDispatchToProps = dispatch => ({
+    actions: bindActionCreators(actions, dispatch)
+});
+console.log(1)
+@log
+@connect(mapStateToProps, mapDispatchToProps)
+ export default class PickApple extends React.Component {
     constructor(props) {
         super(props);
       }
@@ -45,12 +55,8 @@ class PickApple extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({
-    state: state.appleCount
-});
+function log(target) {
+    console.log(123)
+}
 
-const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators(actions, dispatch)
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(PickApple);
+// export default connect(mapStateToProps, mapDispatchToProps)(PickApple);
