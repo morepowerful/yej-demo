@@ -16,6 +16,7 @@ const enhancer = isPro ?  applyMiddleware(thunk) :compose(
     DevTools.instrument()
   )
 const store = createStore(reducer, enhancer);
+debugger;
 render(
     <Provider store={store}>
     <div>
